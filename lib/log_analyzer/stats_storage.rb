@@ -13,8 +13,9 @@ module LogAnalyzer
       end
     end
 
-    # we could be smarter here and strip the sub path of the webpage path, so that
-    # /about/2 and /about are considered same, but would depend on business reqs.
+    # we could be smarter here and strip the sub path of the webpage path, so
+    # that /about/2 and /about are considered same, but would depend on business
+    # requirements.
     def add(endpoint, ip)
       data[endpoint][:count] += 1
       data[endpoint][:unique_ips] << ip

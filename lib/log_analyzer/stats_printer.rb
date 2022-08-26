@@ -1,5 +1,5 @@
 module LogAnalyzer
-    module StatsPrinter
+  module StatsPrinter
     extend self
 
     def call(log_storage_data)
