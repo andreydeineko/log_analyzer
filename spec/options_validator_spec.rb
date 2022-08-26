@@ -1,6 +1,6 @@
-require "./options_validator"
+require "./lib/log_analyzer/options_validator"
 
-describe OptionsValidator do
+describe LogAnalyzer::OptionsValidator do
   describe ".call" do
     subject { described_class.new(args).call }
 

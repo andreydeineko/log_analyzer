@@ -1,13 +1,13 @@
-require "./stats_printer"
-require "./stats_storage"
-require "./file_reader"
+require "./lib/log_analyzer/stats_printer"
+require "./lib/log_analyzer/stats_storage"
+require "./lib/log_analyzer/file_reader"
 
-describe StatsPrinter do
+describe LogAnalyzer::StatsPrinter do
   describe ".call" do
-    let(:storage) { StatsStorage.new }
+    let(:storage) { LogAnalyzer::StatsStorage.new }
 
     before do
-      FileReader.call("./spec/fixtures/webserver.log") do |line|
+      LogAnalyzer::FileReader.call("./spec/fixtures/webserver.log") do |line|
         storage.add(*line.split(" "))
       end
     end

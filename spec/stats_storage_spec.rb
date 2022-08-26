@@ -1,6 +1,6 @@
-require "./stats_storage"
+require "./lib/log_analyzer/stats_storage"
 
-describe StatsStorage do
+describe LogAnalyzer::StatsStorage do
   describe "#add" do
     let(:storage) { described_class.new }
 
