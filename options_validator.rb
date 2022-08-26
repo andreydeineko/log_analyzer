@@ -16,30 +16,42 @@ class OptionsValidator
   end
 
   def call
-    unless args.size == 1
-      raise(
-        UnexpectedNumberOfArgumentsError,
-        "Expected 1 argument, received #{args.size} arguments"
-      )
+    with_valid_args_size do
+      filename = args.first
+
+      with_valid_file_extension(filename) do
+        with_file(filename) do
+          filename
+        end
+      end
     end
-
-    filename = args.first
-
-    unless File.extname(filename) == ALLOWED_EXTENSION
-      raise(
-        UnexpectedFileExtenstionError, "Expected file with #{ALLOWED_EXTENSION}" \
-        " extension, received #{File.extname(filename)}"
-      )
-    end
-
-    unless File.file?(filename)
-      raise(FileDoesNotExistError, filename)
-    end
-
-    filename
   end
 
   private
 
   attr_reader(:args)
+
+  def with_valid_args_size
+    return yield if args.size == 1
+
+    raise(
+      UnexpectedNumberOfArgumentsError,
+      "Expected 1 argument, received #{args.size} arguments"
+    )
+  end
+
+  def with_valid_file_extension(filename)
+    return yield if File.extname(filename) == ALLOWED_EXTENSION
+
+    raise(
+      UnexpectedFileExtenstionError, "Expected file with #{ALLOWED_EXTENSION}" \
+      " extension, received #{File.extname(filename)}"
+    )
+  end
+
+  def with_file(filename)
+    return yield if File.file?(filename)
+
+    raise(FileDoesNotExistError, filename)
+  end
 end
