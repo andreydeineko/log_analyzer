@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 require_relative "log_analyzer/options_validator"
 require_relative "log_analyzer/file_reader"
 require_relative "log_analyzer/stats_storage"
@@ -21,5 +19,3 @@ module LogAnalyzer
     end
   end
 end
-
-LogAnalyzer.call
